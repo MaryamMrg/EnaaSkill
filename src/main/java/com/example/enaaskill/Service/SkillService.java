@@ -39,7 +39,7 @@ public class SkillService {
         List<Skill> skills = skillRepository.findAll();
         return skillMapper.toDtos(skills);
     }
-    
+
 
     public SkillDto getSkillById(Long skillId) {
         Skill skill = skillRepository.findById(skillId).orElseThrow(()->new RuntimeException("not found"));
