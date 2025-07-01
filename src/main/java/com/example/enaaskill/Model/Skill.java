@@ -6,7 +6,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class skill {
+public class Skill {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,13 +16,13 @@ public class skill {
 
    private boolean isValidated;
 
-    public skill(Long skillId, String skillName, boolean isValidated) {
+    public Skill(Long skillId, String skillName, boolean isValidated) {
         this.skillId = skillId;
         this.skillName = skillName;
         this.isValidated = isValidated;
     }
 
-    public skill() {
+    public Skill() {
     }
 
     public boolean isValidated() {
