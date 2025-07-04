@@ -3,13 +3,21 @@ package com.example.enaaskill.Dto;
 public class SkillDto {
 
     private Long SkillId;
-    private String SkillName;
+    private String skillName;
     private boolean isValidated;
 
     public SkillDto(Long skillId, String skillName, boolean isValidated) {
         SkillId = skillId;
-        SkillName = skillName;
+        this.skillName = skillName;
         this.isValidated = isValidated;
+    }
+
+    public String getSkillName() {
+        return skillName;
+    }
+
+    public void setSkillName(String skillName) {
+        this.skillName = skillName;
     }
 
     public SkillDto() {
@@ -23,13 +31,7 @@ public class SkillDto {
         SkillId = skillId;
     }
 
-    public String getSkillName() {
-        return SkillName;
-    }
 
-    public void setSkillName(String skillName) {
-        SkillName = skillName;
-    }
 
     public boolean isValidated() {
         return isValidated;

@@ -2,5 +2,5 @@ package com.example.enaaskill.Model;
 
 public enum Status {
 
-    VALID  , INVALID
+    In_Progress,Passed,Failed;
 }

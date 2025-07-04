@@ -21,6 +21,7 @@ public class SubSkillService {
 
 
     public SubSkillDto createSubSkill(SubSkillDto subSkillDto) {
+
         SubSkill subSkill = subSkillMapper.toEntity(subSkillDto);
         SubSkill saved = subSkillRepository.save(subSkill);
         return subSkillMapper.toDto(saved);
@@ -45,7 +46,7 @@ public class SubSkillService {
     public SubSkillDto updateSubSkill(SubSkillDto subSkillDto,Long subSkillId) {
         SubSkill subSkill=subSkillRepository.findById(subSkillId).orElseThrow(()->new RuntimeException("not found"));
         subSkill.setSubSkillName(subSkillDto.getSubSkillName());
-        subSkill.setSubSkillStatus(subSkillDto.getStatus());
+        subSkill.setSubSkillStatus(subSkillDto.getSubSkillStatus());
         SubSkill saved = subSkillRepository.save(subSkill);
         return subSkillMapper.toDto(saved);
     }

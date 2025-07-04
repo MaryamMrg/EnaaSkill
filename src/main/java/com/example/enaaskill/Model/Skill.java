@@ -1,9 +1,9 @@
 package com.example.enaaskill.Model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Skill {
@@ -11,6 +11,7 @@ public class Skill {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long skillId;
+
 
     private String skillName;
 
@@ -48,4 +49,8 @@ public class Skill {
     public void setSkillName(String skillName) {
         this.skillName = skillName;
     }
+
+
+    @OneToMany
+    private List<SubSkill> subSkills = new ArrayList<SubSkill>();
 }

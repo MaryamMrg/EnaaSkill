@@ -1,9 +1,6 @@
 package com.example.enaaskill.Model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class SubSkill {
@@ -15,13 +12,14 @@ public class SubSkill {
     private String SubSkillName;
     private Status SubSkillStatus;
 
-    public SubSkill(Long subSkillId, String subSkillName, Status subSkillStatus) {
+    public SubSkill() {
+    }
+
+    public SubSkill(Long subSkillId, String subSkillName, Status subSkillStatus, Skill skill) {
         SubSkillId = subSkillId;
         SubSkillName = subSkillName;
         SubSkillStatus = subSkillStatus;
-    }
-
-    public SubSkill() {
+        this.skill = skill;
     }
 
     public Long getSubSkillId() {
@@ -47,4 +45,16 @@ public class SubSkill {
     public void setSubSkillStatus(Status subSkillStatus) {
         SubSkillStatus = subSkillStatus;
     }
+
+    public Skill getSkill() {
+        return skill;
+    }
+
+    public void setSkill(Skill skill) {
+        this.skill = skill;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "skillId")
+    private Skill skill;
 }

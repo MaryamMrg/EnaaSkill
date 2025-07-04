@@ -32,7 +32,7 @@ public class SkillController {
     public SkillDto getSkillById(@PathVariable("skillId") Long skillId) {
         return skillService.getSkillById(skillId);
     }
-    
+
 
     @PutMapping("/update/{skillId}")
     public SkillDto updateSkill(@PathVariable Long skillId, @RequestBody SkillDto skillDto) {

@@ -6,17 +6,26 @@ public class SubSkillDto {
 
     private Long subSkillId;
     private String subSkillName;
-    private Status status;
+    private Status SubSkillStatus;
 
+    private Long skillId;
 
-    public SubSkillDto(Long subSkillId, String subSkillName, Status status) {
+    public SubSkillDto(Long subSkillId, String subSkillName, Status subSkillStatus, Long skillId) {
         this.subSkillId = subSkillId;
         this.subSkillName = subSkillName;
-        this.status = status;
+        SubSkillStatus = subSkillStatus;
+        this.skillId = skillId;
     }
 
-
     public SubSkillDto() {
+    }
+
+    public Long getSkillId() {
+        return skillId;
+    }
+
+    public void setSkillId(Long skillId) {
+        this.skillId = skillId;
     }
 
     public Long getSubSkillId() {
@@ -35,11 +44,12 @@ public class SubSkillDto {
         this.subSkillName = subSkillName;
     }
 
-    public Status getStatus() {
-        return status;
+
+    public Status getSubSkillStatus() {
+        return SubSkillStatus;
     }
 
-    public void setStatus(Status status) {
-        this.status = status;
+    public void setSubSkillStatus(Status subSkillStatus) {
+        SubSkillStatus = subSkillStatus;
     }
 }
