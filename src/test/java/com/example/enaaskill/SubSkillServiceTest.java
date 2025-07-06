@@ -9,6 +9,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.*;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 public class SubSkillServiceTest {
@@ -33,7 +36,7 @@ public class SubSkillServiceTest {
     }
 
     @Test
-    void createSubSkill_shouldReturnSavedSubSkillDto() {
+    void createSubSkill() {
         // Arrange
         SubSkillDto subSkillDto = new SubSkillDto();
         subSkillDto.setSubSkillId(1L);
@@ -73,5 +76,60 @@ public class SubSkillServiceTest {
         verify(subSkillMapper).toEntity(subSkillDto);
         verify(subSkillRepository).save(subSkillEntity);
         verify(subSkillMapper).toDto(savedSubSkill);
+    }
+
+
+    @Test
+    void getAllSubSkills() {
+        // Arrange
+        SubSkill sub1 = new SubSkill();
+        sub1.setSubSkillId(1L);
+        sub1.setSubSkillName("Encapsulation");
+
+        System.out.println("subskill 1 :"+sub1.getSubSkillName());
+
+        SubSkill sub2 = new SubSkill();
+        sub2.setSubSkillId(2L);
+        sub2.setSubSkillName("Polymorphism");
+
+        System.out.println("subskill 2 :"+sub2.getSubSkillName());
+
+        List<SubSkill> subSkills = Arrays.asList(sub1, sub2);
+
+
+        System.out.println("subskills :"+subSkills.toString());
+
+
+        SubSkillDto dto1 = new SubSkillDto();
+        dto1.setSubSkillId(1L);
+        dto1.setSubSkillName("Encapsulation");
+
+
+        System.out.println("dto 1 : "+dto1.getSubSkillName());
+
+        SubSkillDto dto2 = new SubSkillDto();
+        dto2.setSubSkillId(2L);
+        dto2.setSubSkillName("Polymorphism");
+        System.out.println("dto 2 : "+dto2.getSubSkillName());
+
+        List<SubSkillDto> expectedDtos = Arrays.asList(dto1, dto2);
+
+
+        when(subSkillRepository.findAll()).thenReturn(subSkills);
+        when(subSkillMapper.toDtos(subSkills)).thenReturn(expectedDtos);
+
+        // Act
+        List<SubSkillDto> result = subSkillService.getAllSubSkills();
+
+        System.out.println("Expected: " + expectedDtos);
+        System.out.println("Result: " + result);
+
+        // Assert
+        assertEquals(expectedDtos.size(), result.size());
+        assertEquals(expectedDtos.get(0).getSubSkillName(), result.get(0).getSubSkillName());
+        assertEquals(expectedDtos.get(1).getSubSkillName(), result.get(1).getSubSkillName());
+
+        verify(subSkillRepository).findAll();
+        verify(subSkillMapper).toDtos(subSkills);
     }
 }

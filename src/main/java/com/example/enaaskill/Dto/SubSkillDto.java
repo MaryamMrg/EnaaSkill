@@ -52,4 +52,12 @@ public class SubSkillDto {
     public void setSubSkillStatus(Status subSkillStatus) {
         SubSkillStatus = subSkillStatus;
     }
+
+    @Override
+    public String toString() {
+        return "SubSkillDto{" +
+                "subSkillId=" + subSkillId +
+                ", subSkillName='" + subSkillName + '\'' +
+                '}';
+    }
 }

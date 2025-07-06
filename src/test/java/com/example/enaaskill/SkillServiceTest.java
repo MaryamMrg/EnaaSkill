@@ -42,7 +42,7 @@ public class SkillServiceTest {
     }
 
     @Test
-    void createSkill_shouldReturnSkillDto() {
+    void createSkill() {
         // Arrange
         SkillDto inputDto = new SkillDto();
         inputDto.setSkillName("environment");
@@ -83,7 +83,7 @@ public class SkillServiceTest {
 
 
     @Test
-    void getAllSkills_shouldReturnListOfSkillDtos() {
+    void getAllSkills() {
         // Arrange
         Skill skill1 = new Skill();
         skill1.setSkillId(1L);
