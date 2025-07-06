@@ -14,6 +14,9 @@ import static org.mockito.Mockito.*;
 import org.mockito.MockitoAnnotations;
 
 
+import java.util.Arrays;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.when;
@@ -42,18 +45,18 @@ public class SkillServiceTest {
     void createSkill_shouldReturnSkillDto() {
         // Arrange
         SkillDto inputDto = new SkillDto();
-        inputDto.setSkillName("Docker");
+        inputDto.setSkillName("environment");
         System.out.println("input : "+inputDto.getSkillName());
         Skill skillEntity = new Skill();
-        skillEntity.setSkillName("Docker");
+        skillEntity.setSkillName("environment");
 
         Skill savedSkill = new Skill();
         savedSkill.setSkillId(1L);
-        savedSkill.setSkillName("Docker");
+        savedSkill.setSkillName("environment");
 
         SkillDto expectedDto = new SkillDto();
         expectedDto.setSkillId(1L);
-        expectedDto.setSkillName("Docker");
+        expectedDto.setSkillName("environment");
         System.out.println("expected skill :"+expectedDto.getSkillName());
 
         when(skillMapper.toEntity(inputDto)).thenReturn(skillEntity);
@@ -67,12 +70,58 @@ public class SkillServiceTest {
         // Assert
         assertNotNull(result);
         assertEquals(1L, result.getSkillId());
-        assertEquals("Docker", result.getSkillName());
+        assertEquals("environment", result.getSkillName());
 
 
         //verify
         verify(skillMapper).toEntity(inputDto);
         verify(skillRepository).save(skillEntity);
         verify(skillMapper).toDto(savedSkill);
+    }
+
+
+
+
+    @Test
+    void getAllSkills_shouldReturnListOfSkillDtos() {
+        // Arrange
+        Skill skill1 = new Skill();
+        skill1.setSkillId(1L);
+        skill1.setSkillName("Java");
+
+        Skill skill2 = new Skill();
+        skill2.setSkillId(2L);
+        skill2.setSkillName("Spring Boot");
+
+        List<Skill> skillList = Arrays.asList(skill1, skill2);
+
+        SkillDto dto1 = new SkillDto();
+        dto1.setSkillId(1L);
+        dto1.setSkillName("Java");
+        System.out.println("dto1 : "+dto1.getSkillName());
+        SkillDto dto2 = new SkillDto();
+        dto2.setSkillId(2L);
+        dto2.setSkillName("Spring Boot");
+        System.out.println("dto2 : "+ dto2.getSkillName());
+        List<SkillDto> expectedDtos = Arrays.asList(dto1, dto2);
+        System.out.println("expected dtos : " +expectedDtos.toString());
+        when(skillRepository.findAll()).thenReturn(skillList);
+        when(skillMapper.toDtos(skillList)).thenReturn(expectedDtos);
+
+        // Act
+        List<SkillDto> result = skillService.getAllSkills();
+        System.out.println("result : " +result.toString());
+        // Assert
+        assertNotNull(result);
+        assertEquals(2, result.size());
+        assertEquals("Java", result.get(0).getSkillName());
+        assertEquals("Spring Boot", result.get(1).getSkillName());
+
+        verify(skillRepository, times(1)).findAll();
+        verify(skillMapper, times(1)).toDtos(skillList);
+
+
+
+
     }
 }

@@ -40,4 +40,13 @@ public class SkillDto {
     public void setValidated(boolean validated) {
         isValidated = validated;
     }
+
+
+    @Override
+    public String toString() {
+        return "SkillDto{" +
+                "SkillId=" + SkillId +
+                ", skillName='" + skillName + '\'' +
+                '}';
+    }
 }
